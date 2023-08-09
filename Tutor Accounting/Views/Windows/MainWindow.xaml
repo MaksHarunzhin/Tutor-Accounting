@@ -4,16 +4,23 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Tutor_Accounting"
+        xmlns:vm="clr-namespace:Tutor_Accounting.ViewModels"
         mc:Ignorable="d"
         Title="MainWindow"
         Width="800"
         Height="450"
         WindowState="Maximized"
         WindowStyle="None">
+    <Window.DataContext>
+        <vm:MainWindowViewModel/>
+    </Window.DataContext>
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
+            <ColumnDefinition Width="{Binding ColumnWidth}"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
+        <Border Grid.Column="0"
+                BorderBrush="Red"
+                BorderThickness="2"/>
     </Grid>
 </Window>
