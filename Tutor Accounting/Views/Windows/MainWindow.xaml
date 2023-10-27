@@ -4,22 +4,88 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Tutor_Accounting"
+        xmlns:behaviors="http://schemas.microsoft.com/xaml/behaviors"
         xmlns:vm="clr-namespace:Tutor_Accounting.ViewModels"
         mc:Ignorable="d"
         Title="MainWindow"
-        Width="800"
-        Height="450"
+        Width="1920"
+        Height="1080"
         WindowState="Maximized"
         WindowStyle="None">
     <Window.DataContext>
         <vm:MainWindowViewModel/>
     </Window.DataContext>
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="{Binding ColumnWidth}"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
+        <Grid Grid.Row="0"
+              Grid.ColumnSpan="2">
+            <Border Width="50"
+                    Height="50"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    Margin="20,0,0,0"
+                    CornerRadius="50"
+                    x:Name="ButtonBorder">
+                <behaviors:Interaction.Triggers>
+                    <behaviors:EventTrigger EventName="MouseLeftButtonDown" SourceObject="{Binding ElementName=ButtonBorder}">
+                        <behaviors:InvokeCommandAction Command="{Binding CloseWindowCommand}" CommandParameter="{Binding ElementName=ButtonBorder}"/>
+                    </behaviors:EventTrigger>
+                </behaviors:Interaction.Triggers>
+                <Border.Style>
+                    <Style TargetType="Border">
+                        <Setter Property="Background" Value="White"/>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#f0f0f0"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Border.Style>
+                <Grid>
+                    <Rectangle Width="20"
+                               Height="3"
+                               Fill="Gray"
+                               VerticalAlignment="Top"
+                               HorizontalAlignment="Center"
+                               Margin="0,18,0,0"/>
+                    <Rectangle Width="20"
+                               Height="3"
+                               Fill="Gray"
+                               VerticalAlignment="Top"
+                               HorizontalAlignment="Center"
+                               Margin="0,24,0,0"/>
+                    <Rectangle Width="20"
+                               Height="3"
+                               Fill="Gray"
+                               VerticalAlignment="Top"
+                               HorizontalAlignment="Center"
+                               Margin="0,30,0,0"/>
+                </Grid>
+            </Border>
+            <TextBlock Text="Tutor Accounting"
+                       FontSize="25"
+                       Width="200"
+                       Height="35"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Center"
+                       Margin="130,0,0,0"/>
+            <TextBlock Text="by Maks Kharunzhin"
+                       Width="90"
+                       Height="15"
+                       FontSize="10"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Top"
+                       Margin="230,55,0,0"/>
+        </Grid>
         <Border Grid.Column="0"
+                Grid.Row="1"
                 BorderBrush="Red"
                 BorderThickness="2"/>
     </Grid>

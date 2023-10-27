@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using Tutor_Accounting.ViewModels.Base;
+using Tutor_Accounting.Infrastructure.Commands;
 
 namespace Tutor_Accounting.ViewModels
 {
@@ -26,7 +28,12 @@ namespace Tutor_Accounting.ViewModels
 
         #region Commands
 
+        public ICommand ShowSidePanelCommand { get; }
+        private bool CanShowSidePanelCommandExecute(object p) => true;
+        private void OnShowSidePanelCommandExecuted (object p)
+        {
 
+        }
 
         #endregion
 
@@ -35,7 +42,7 @@ namespace Tutor_Accounting.ViewModels
         /// </summary>
         public MainWindowViewModel()
         {
-
+            ShowSidePanelCommand = new ActionCommand(OnShowSidePanelCommandExecuted, CanShowSidePanelCommandExecute);
         }
     }
 }

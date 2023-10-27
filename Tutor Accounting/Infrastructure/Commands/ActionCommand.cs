@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Tutor_Accounting.Infrastructur.Commands.Base;
+using Tutor_Accounting.Infrastructuree.Commands.Base;
 
-namespace Tutor_Accounting.Infrastructur.Commands
+namespace Tutor_Accounting.Infrastructure.Commands
 {
     internal class ActionCommand : Command
     {
