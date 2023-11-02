@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Tutor_Accounting.ViewModels.Base;
 using Tutor_Accounting.Infrastructure.Commands;
+using Tutor_Accounting.Infrastructure;
+using System.Collections.ObjectModel;
 
 namespace Tutor_Accounting.ViewModels
 {
@@ -14,14 +16,10 @@ namespace Tutor_Accounting.ViewModels
 
         #region Properties
 
-        private double _columnWidth = 300;
-        /// <summary>
-        /// Ширина столбца с настройками календаря
-        /// </summary>
-        public double ColumnWidth
+        public ObservableCollection<double> SidePanelWidth
         {
-            get => _columnWidth;
-            set => Set(ref _columnWidth, value);
+            get => Fields._sidePanelWidth;
+            set => Set(ref Fields._sidePanelWidth, value);
         }
 
         #endregion
@@ -29,11 +27,6 @@ namespace Tutor_Accounting.ViewModels
         #region Commands
 
         public ICommand ShowSidePanelCommand { get; }
-        private bool CanShowSidePanelCommandExecute(object p) => true;
-        private void OnShowSidePanelCommandExecuted (object p)
-        {
-
-        }
 
         #endregion
 
@@ -42,7 +35,7 @@ namespace Tutor_Accounting.ViewModels
         /// </summary>
         public MainWindowViewModel()
         {
-            ShowSidePanelCommand = new ActionCommand(OnShowSidePanelCommandExecuted, CanShowSidePanelCommandExecute);
+            ShowSidePanelCommand = new ActionCommand(Service.OnShowSidePanelCommandExecuted, Service.CanShowSidePanelCommandExecute);
         }
     }
 }

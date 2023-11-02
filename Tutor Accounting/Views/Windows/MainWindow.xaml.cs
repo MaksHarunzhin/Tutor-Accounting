@@ -23,6 +23,11 @@ namespace Tutor_Accounting
         public MainWindow()
         {
             InitializeComponent();
+
+            double width = System.Windows.SystemParameters.PrimaryScreenWidth;
+            double height = System.Windows.SystemParameters.PrimaryScreenHeight;
+            this.Height = height * 4 / 5;
+            this.Width = width * 3.8 / 4;
         }
     }
 }
