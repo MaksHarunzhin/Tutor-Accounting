@@ -17,7 +17,7 @@
     <Window.Resources>
         <Style x:Key="CloseButtonStyle" TargetType="Button">
             <Setter Property="OverridesDefaultStyle" Value="True"/>
-            <Setter Property="Background" Value="White"/>
+            <Setter Property="Background" Value="#29374e"/>
             <Setter Property="Foreground" Value="#acacac"/>
             <Setter Property="Template">
                 <Setter.Value>
@@ -29,8 +29,9 @@
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Background" Value="#e5e5e5" />
                                 <Setter Property="Foreground" Value="Red"/>
+                                <Setter Property="BorderThickness" Value="0.5"/>
+                                <Setter Property="BorderBrush" Value="#e5e5e5"/>
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -40,7 +41,7 @@
 
         <Style x:Key="WindowStateButtonStyle" TargetType="Button">
             <Setter Property="OverridesDefaultStyle" Value="True"/>
-            <Setter Property="Background" Value="White"/>
+            <Setter Property="Background" Value="#29374e"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
@@ -49,11 +50,6 @@
         Background="{TemplateBinding Background}">
                             <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
                         </Border>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Background" Value="#e5e5e5" />
-                            </Trigger>
-                        </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
@@ -62,7 +58,7 @@
     <Window.DataContext>
         <vm:MainWindowViewModel/>
     </Window.DataContext>
-    <Grid>
+    <Grid Background="#29374e">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="80"/>
@@ -73,9 +69,10 @@
                 <ColumnDefinition/>
                 <ColumnDefinition Width="350"/>
             </Grid.ColumnDefinitions>
-            
+
             <Grid Grid.Row="0"
-              Grid.ColumnSpan="3">
+              Grid.ColumnSpan="3"
+                  >
                 <Border Width="50"
                     Height="50"
                     HorizontalAlignment="Left"
@@ -83,11 +80,6 @@
                     Margin="20,0,0,0"
                     CornerRadius="50"
                     x:Name="ButtonBorder">
-                    <behaviors:Interaction.Triggers>
-                        <behaviors:EventTrigger EventName="MouseLeftButtonDown" SourceObject="{Binding ElementName=ButtonBorder}">
-                            <behaviors:InvokeCommandAction Command="{Binding ShowSidePanelCommand}" CommandParameter="{Binding ElementName=SidePanel}"/>
-                        </behaviors:EventTrigger>
-                    </behaviors:Interaction.Triggers>
                     <Border.Style>
                         <Style TargetType="Border">
                             <Setter Property="Background" Value="White"/>
@@ -122,12 +114,14 @@
                 <TextBlock Text="Tutor Accounting"
                        FontSize="25"
                        Width="200"
+                       Foreground="#e7f2f5"
                        Height="35"
                        HorizontalAlignment="Left"
                        VerticalAlignment="Center"
                        Margin="130,0,0,0"/>
                 <TextBlock Text="by Maks Kharunzhin"
                        Width="90"
+                       Foreground="#e7f2f5"
                        Height="15"
                        FontSize="10"
                        HorizontalAlignment="Left"
@@ -137,11 +131,23 @@
 
             <Grid Grid.Row="0"
       Grid.Column="1">
-                <Border Height="30"
-            Background="Black"
+                <Border Height="35"
+                        Width="500"
+            Background="#00606d"
             VerticalAlignment="Top"
             CornerRadius="0,0,20,20">
 
+                </Border>
+                <Border Height="55" Width="140"
+                        VerticalAlignment="Top"
+                        HorizontalAlignment="Center"
+                        CornerRadius="0,0,20,20"
+                        Background="#00606d">
+                    <Label Content="{Binding CurrentTime[0]}"
+                           Foreground="#e7f2f5"
+                           HorizontalContentAlignment="Center"
+                           VerticalContentAlignment="Center"
+                           FontSize="35"/>
                 </Border>
             </Grid>
 
@@ -152,23 +158,50 @@
                         VerticalAlignment="Top"
                         HorizontalAlignment="Right"
                         Content="✖"
-                        FontSize="15"/>
+                        FontSize="15"
+                        Command="{Binding CloseAppCommand}"/>
                 <Button Style="{StaticResource WindowStateButtonStyle}"
                         Width="80" Height="30"
                         VerticalAlignment="Top"
                         HorizontalAlignment="Right"
-                        Margin="0,0,80,0">
-                    <fa:FontAwesome Icon="Regular_WindowMaximize"
-                                    FontSize="18"
+                        Margin="0,0,80,0"
+                        Command="{Binding ResizeWindowCommand}">
+                    <fa:FontAwesome FontSize="18"
                                     Width="80" Height="30"
                                     TextAlignment="Center"
                                     Padding="0,6,0,0">
                         <fa:FontAwesome.Style>
                             <Style TargetType="fa:FontAwesome">
                                 <Setter Property="Foreground" Value="#acacac"/>
+                                <Setter Property="Icon" Value="Regular_WindowRestore"/>
                                 <Style.Triggers>
                                     <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter Property="Foreground" Value="#9d9d9d"/>
+                                        <Setter Property="Foreground" Value="#e5eef6"/>
+                                    </Trigger>
+                                    <DataTrigger Binding="{Binding SizeMode[0]}" Value="False">
+                                        <Setter Property="Icon" Value="Regular_WindowMaximize"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </fa:FontAwesome.Style>
+                    </fa:FontAwesome>
+                </Button>
+                <Button Style="{StaticResource WindowStateButtonStyle}"
+                        Width="80" Height="30"
+                        VerticalAlignment="Top"
+                        HorizontalAlignment="Right"
+                        Margin="0,0,160,0"
+                        Command="{Binding MinimizedWindowCommand}">
+                    <fa:FontAwesome Icon="Regular_WindowMinimize"
+                                    FontSize="18"
+                                    Width="80" Height="30"
+                                    TextAlignment="Center">
+                        <fa:FontAwesome.Style>
+                            <Style TargetType="fa:FontAwesome">
+                                <Setter Property="Foreground" Value="#acacac"/>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Foreground" Value="#e5eef6"/>
                                     </Trigger>
                                 </Style.Triggers>
                             </Style>
@@ -181,12 +214,25 @@
               Grid.Column="0"
               x:Name="SidePanel"
               HorizontalAlignment="Left"
+              VerticalAlignment="Top"
               Width="{Binding SidePanelWidth[0]}">
                 <Border Grid.Column="0"
                 Grid.Row="1"
-                        CornerRadius="0,20,20,0"
+                x:Name="FirstBorder"
+                CornerRadius="0,20,20,0"
                 BorderBrush="Red"
+                        Background="Red"
                 BorderThickness="2"/>
+                <behaviors:Interaction.Triggers>
+                    <behaviors:EventTrigger EventName="MouseLeftButtonDown" SourceObject="{Binding ElementName=FirstBorder}">
+                        <behaviors:InvokeCommandAction Command="{Binding ShowSidePanelCommand}" CommandParameter="{Binding ElementName=SidePanel}"/>
+                    </behaviors:EventTrigger>
+                </behaviors:Interaction.Triggers>
+                <Grid.Style>
+                    <Style TargetType="Grid">
+                        <Setter Property="Height" Value="350"/>
+                    </Style>
+                </Grid.Style>
             </Grid>
         </Grid>
     </Grid>

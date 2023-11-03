@@ -9,7 +9,11 @@ namespace Tutor_Accounting.Infrastructure
 {
     internal static class Fields
     {
-        public static ObservableCollection<double> _sidePanelWidth = new ObservableCollection<double> { 350 };
+        public static ObservableCollection<double> _sidePanelWidth = new ObservableCollection<double> { 30 };
+
+        public static ObservableCollection<string> _currentTime = new ObservableCollection<string> { DateTime.Now.ToString().Split(' ')[1].Remove(5, 3) };
+
+        public static ObservableCollection<bool> _sizeMode = new ObservableCollection<bool> { false };
 
     }
 }
