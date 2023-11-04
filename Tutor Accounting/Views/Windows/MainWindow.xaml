@@ -7,6 +7,7 @@
         xmlns:fa="http://schemas.fontawesome.com/icons/"
         xmlns:behaviors="http://schemas.microsoft.com/xaml/behaviors"
         xmlns:vm="clr-namespace:Tutor_Accounting.ViewModels"
+        xmlns:muc="clr-namespace:Tutor_Accounting.Views.MyUserControls"
         mc:Ignorable="d"
         Title="MainWindow"
         Width="1920"
@@ -55,10 +56,18 @@
             </Setter>
         </Style>
     </Window.Resources>
+    
     <Window.DataContext>
         <vm:MainWindowViewModel/>
     </Window.DataContext>
-    <Grid Background="#29374e">
+    
+    <Grid>
+        <Grid.Background>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                <GradientStop Color="#29374e" Offset="0.2"/>
+                <GradientStop Color="#00606d" Offset="0.9"/>
+            </LinearGradientBrush>
+        </Grid.Background>
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="80"/>
@@ -71,9 +80,8 @@
             </Grid.ColumnDefinitions>
 
             <Grid Grid.Row="0"
-              Grid.ColumnSpan="3"
-                  >
-                <Border Width="50"
+              Grid.ColumnSpan="3">
+                <!--<Border Width="50"
                     Height="50"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Center"
@@ -110,36 +118,70 @@
                                HorizontalAlignment="Center"
                                Margin="0,30,0,0"/>
                     </Grid>
-                </Border>
+                </Border>-->
                 <TextBlock Text="Tutor Accounting"
-                       FontSize="25"
-                       Width="200"
+                       FontSize="28"
+                       Width="230"
                        Foreground="#e7f2f5"
-                       Height="35"
+                       Height="38"
                        HorizontalAlignment="Left"
                        VerticalAlignment="Center"
-                       Margin="130,0,0,0"/>
+                       Margin="40,0,0,20"/>
                 <TextBlock Text="by Maks Kharunzhin"
-                       Width="90"
+                       Width="120"
                        Foreground="#e7f2f5"
-                       Height="15"
-                       FontSize="10"
+                       Height="18"
+                       FontSize="13"
                        HorizontalAlignment="Left"
                        VerticalAlignment="Top"
-                       Margin="230,55,0,0"/>
+                       Margin="140,50,0,0"/>
             </Grid>
 
             <Grid Grid.Row="0"
-      Grid.Column="1">
+      Grid.Column="0"
+                  Grid.ColumnSpan="3"
+                  HorizontalAlignment="Center"
+                  VerticalAlignment="Top">
                 <Border Height="35"
                         Width="500"
+                        BorderBrush="#00dfc4"
+                        BorderThickness="1"
             Background="#00606d"
             VerticalAlignment="Top"
             CornerRadius="0,0,20,20">
-
+                    <fa:FontAwesome Icon="Solid_ChalkboardTeacher"
+                                    HorizontalAlignment="Left"
+                                    Margin="30,0,0,0"
+                                    VerticalAlignment="Center"
+                                    ToolTip="Мои ученики"
+                                    x:Name="Mustudents">
+                        <behaviors:Interaction.Triggers>
+                            <behaviors:EventTrigger EventName="MouseLeftButtonDown" SourceObject="{Binding ElementName=Mustudents}">
+                                <behaviors:InvokeCommandAction Command="{Binding ShowSidePanelCommand}" CommandParameter="{Binding ElementName=SidePanelMyStudents}"/>
+                            </behaviors:EventTrigger>
+                        </behaviors:Interaction.Triggers>
+                        <fa:FontAwesome.Style>
+                            <Style TargetType="fa:FontAwesome">
+                                <Setter Property="Foreground" Value="Black"/>
+                                <Setter Property="FontSize" Value="20"/>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Foreground" Value="White"/>
+                                        <Setter Property="FontSize" Value="25"/>
+                                    </Trigger>
+                                    <DataTrigger Binding="{Binding PanelsList[0]}" Value="True">
+                                        <Setter Property="Foreground" Value="White"/>
+                                        <Setter Property="FontSize" Value="25"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </fa:FontAwesome.Style>
+                    </fa:FontAwesome>
                 </Border>
                 <Border Height="55" Width="140"
                         VerticalAlignment="Top"
+                        BorderThickness="1"
+                        BorderBrush="#00dfc4"
                         HorizontalAlignment="Center"
                         CornerRadius="0,0,20,20"
                         Background="#00606d">
@@ -157,13 +199,30 @@
                         Width="80" Height="30"
                         VerticalAlignment="Top"
                         HorizontalAlignment="Right"
-                        Content="✖"
+                        Background="{Binding}"
                         FontSize="15"
-                        Command="{Binding CloseAppCommand}"/>
+                        Command="{Binding CloseAppCommand}">
+                    <Label Content="✖"
+                           Width="80" Height="30"
+                           HorizontalContentAlignment="Center"
+                           VerticalContentAlignment="Center">
+                        <Label.Style>
+                            <Style TargetType="Label">
+                                <Setter Property="Foreground" Value="#acacac"/>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Foreground" Value="Red"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Label.Style>
+                    </Label>
+                </Button>
                 <Button Style="{StaticResource WindowStateButtonStyle}"
                         Width="80" Height="30"
                         VerticalAlignment="Top"
                         HorizontalAlignment="Right"
+                        Background="{Binding}"
                         Margin="0,0,80,0"
                         Command="{Binding ResizeWindowCommand}">
                     <fa:FontAwesome FontSize="18"
@@ -189,6 +248,7 @@
                 <Button Style="{StaticResource WindowStateButtonStyle}"
                         Width="80" Height="30"
                         VerticalAlignment="Top"
+                        Background="{Binding}"
                         HorizontalAlignment="Right"
                         Margin="0,0,160,0"
                         Command="{Binding MinimizedWindowCommand}">
@@ -210,29 +270,161 @@
                 </Button>
             </Grid>
 
+            <Grid Grid.Row="1" 
+                  Grid.Column="1"
+                  Grid.ColumnSpan="2"
+                  Margin="50">
+                <muc:WorkZone/>
+            </Grid>
+
             <Grid Grid.Row="1"
-              Grid.Column="0"
-              x:Name="SidePanel"
+                  Grid.Column="0">
+                <Grid x:Name="SidePanelMyStudents"
               HorizontalAlignment="Left"
               VerticalAlignment="Top"
               Width="{Binding SidePanelWidth[0]}">
-                <Border Grid.Column="0"
-                Grid.Row="1"
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="30"/>
+                    </Grid.ColumnDefinitions>
+                    <Border Width="30"
+                        VerticalAlignment="Top"
+                        Grid.Column="1"
+                Height="350"
                 x:Name="FirstBorder"
                 CornerRadius="0,20,20,0"
-                BorderBrush="Red"
-                        Background="Red"
-                BorderThickness="2"/>
-                <behaviors:Interaction.Triggers>
-                    <behaviors:EventTrigger EventName="MouseLeftButtonDown" SourceObject="{Binding ElementName=FirstBorder}">
-                        <behaviors:InvokeCommandAction Command="{Binding ShowSidePanelCommand}" CommandParameter="{Binding ElementName=SidePanel}"/>
-                    </behaviors:EventTrigger>
-                </behaviors:Interaction.Triggers>
-                <Grid.Style>
-                    <Style TargetType="Grid">
-                        <Setter Property="Height" Value="350"/>
-                    </Style>
-                </Grid.Style>
+                BorderBrush="#00dfc4"
+                Background="#00606d"
+                BorderThickness="0,2,2,2">
+                        <Label Content="Мои ученики"
+                           HorizontalContentAlignment="Right"
+                           VerticalContentAlignment="Top"
+                           Padding="0,0,40,0"
+                           Height="30"
+                           Width="350"
+                           Margin="-351,0,29,316"
+                           FontSize="20"
+                           Foreground="White"
+                           RenderTransformOrigin="1,0">
+                            <Label.RenderTransform>
+                                <RotateTransform Angle="-90"/>
+                            </Label.RenderTransform>
+                        </Label>
+                    </Border>
+                    <Border Margin="0,0,30,0"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="2"
+                        BorderThickness="0,1,1,1"
+                        BorderBrush="#00dfc4"
+                        Background="#00606d">
+
+                    </Border>
+                    <behaviors:Interaction.Triggers>
+                        <behaviors:EventTrigger EventName="MouseLeftButtonDown" SourceObject="{Binding ElementName=FirstBorder}">
+                            <behaviors:InvokeCommandAction Command="{Binding ShowSidePanelCommand}" CommandParameter="{Binding ElementName=SidePanelMyStudents}"/>
+                        </behaviors:EventTrigger>
+                    </behaviors:Interaction.Triggers>
+                    <Grid.Style>
+                        <Style TargetType="Grid">
+                            <Setter Property="Height" Value="350"/>
+                        </Style>
+                    </Grid.Style>
+                </Grid>
+
+                <Grid HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                      x:Name="OtherGrid"
+                Width="{Binding SidePanelWidth[1]}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="30"/>
+                    </Grid.ColumnDefinitions>
+                    <Border Width="30"
+                      Margin="0,200,0,0"
+                        VerticalAlignment="Top"
+                        Grid.Column="1"
+                        Height="350"
+                        x:Name="SecondBorder"
+                        CornerRadius="0,20,20,0"
+                        BorderBrush="#00dfc4"
+                        Background="#00606d"
+                        BorderThickness="0,2,2,2">
+
+                    </Border>
+                    <Border Margin="0,0,30,0"
+        Grid.Column="0"
+        Grid.ColumnSpan="2"
+        BorderThickness="0,1,1,1"
+        BorderBrush="#00dfc4"
+        Background="#00606d">
+
+                    </Border>
+                    <behaviors:Interaction.Triggers>
+                        <behaviors:EventTrigger EventName="MouseLeftButtonDown" SourceObject="{Binding ElementName=SecondBorder}">
+                            <behaviors:InvokeCommandAction Command="{Binding ShowSidePanelCommand}" CommandParameter="{Binding ElementName=OtherGrid}"/>
+                        </behaviors:EventTrigger>
+                    </behaviors:Interaction.Triggers>
+                    <Grid.Style>
+                        <Style TargetType="Grid">
+                            <Setter Property="Height" Value="550"/>
+                        </Style>
+                    </Grid.Style>
+                </Grid>
+
+                <Grid HorizontalAlignment="Left"
+        VerticalAlignment="Top"
+                      x:Name="OtherGrid1"
+        Width="{Binding SidePanelWidth[2]}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="30"/>
+                    </Grid.ColumnDefinitions>
+                    <Border Width="30"
+                Margin="0,400,0,0"
+                VerticalAlignment="Top"
+                Grid.Column="1"
+                Height="350"
+                x:Name="ThirdBorder"
+                CornerRadius="0,20,20,0"
+                BorderBrush="#00dfc4"
+                Background="#00606d"
+                BorderThickness="0,2,2,2">
+                        <!--<Label Content="Мои ученики"
+   HorizontalContentAlignment="Center"
+   VerticalContentAlignment="Top"
+   Padding="0,0,0,0"
+   Height="30"
+   Width="350"
+   Margin="-351,0,29,316"
+   FontSize="20"
+   Foreground="White"
+   RenderTransformOrigin="1,0">
+                    <Label.RenderTransform>
+                        <RotateTransform Angle="-90"/>
+                    </Label.RenderTransform>
+                </Label>-->
+                    </Border>
+                    <Border Margin="0,0,30,0"
+Grid.Column="0"
+Grid.ColumnSpan="2"
+BorderThickness="0,1,1,1"
+BorderBrush="#00dfc4"
+Background="#00606d">
+
+                    </Border>
+                    <behaviors:Interaction.Triggers>
+                        <behaviors:EventTrigger EventName="MouseLeftButtonDown" SourceObject="{Binding ElementName=ThirdBorder}">
+                            <behaviors:InvokeCommandAction Command="{Binding ShowSidePanelCommand}" CommandParameter="{Binding ElementName=OtherGrid1}"/>
+                        </behaviors:EventTrigger>
+                    </behaviors:Interaction.Triggers>
+                    <Grid.Style>
+                        <Style TargetType="Grid">
+                            <Setter Property="Height" Value="750"/>
+                        </Style>
+                    </Grid.Style>
+                </Grid>
+
+
             </Grid>
         </Grid>
     </Grid>

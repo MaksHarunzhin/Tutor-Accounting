@@ -19,8 +19,22 @@ namespace Tutor_Accounting.Infrastructure
         public static void OnShowSidePanelCommandExecuted(object p)
         {
             Grid grid = (Grid)p;
-            if (Fields._sidePanelWidth[0] == 30)
-            { 
+            if (grid.Width == 30)
+            {
+                if(grid.Height == 350)
+                {
+                    Fields._panelsList[0] = true;
+                    Fields._sidePanelWidth[0] = 350;
+                } else if (grid.Height == 550)
+                {
+                    Fields._panelsList[1] = true;
+                    Fields._sidePanelWidth[1] = 350;
+                } else
+                {
+                    Fields._panelsList[2] = true;
+                    Fields._sidePanelWidth[2] = 350;
+                }
+
                 DoubleAnimation doubleAnimationWidth = new DoubleAnimation();
                 doubleAnimationWidth.Duration = new Duration(TimeSpan.FromSeconds(0.3));
                 doubleAnimationWidth.From = 30;
@@ -28,15 +42,29 @@ namespace Tutor_Accounting.Infrastructure
 
                 DoubleAnimation doubleAnimationHeight = new DoubleAnimation();
                 doubleAnimationHeight.Duration = new Duration(TimeSpan.FromSeconds(0.3));
-                doubleAnimationHeight.From = 350;
+                doubleAnimationHeight.From = grid.Height;
                 doubleAnimationHeight.To = App.Current.MainWindow.Height - 80;
 
                 grid.BeginAnimation(Grid.WidthProperty, doubleAnimationWidth);
                 grid.BeginAnimation(Grid.HeightProperty, doubleAnimationHeight);
 
-                Fields._sidePanelWidth[0] = 350;
             } else
             {
+                double NewHeight = 0;
+                if (Fields._panelsList[0])
+                {
+                    Fields._panelsList[0] = false;
+                    NewHeight = 350;
+                } else if (Fields._panelsList[1])
+                {
+                    Fields._panelsList[1] = false;
+                    NewHeight = 550;
+                } else
+                {
+                    NewHeight = 750;
+                    Fields._panelsList[2] = false;
+                }
+
                 DoubleAnimation doubleAnimationWidth = new DoubleAnimation();
                 doubleAnimationWidth.Duration = new Duration(TimeSpan.FromSeconds(0.3));
                 doubleAnimationWidth.From = 350;
@@ -45,7 +73,7 @@ namespace Tutor_Accounting.Infrastructure
                 DoubleAnimation doubleAnimationHeight = new DoubleAnimation();
                 doubleAnimationHeight.Duration = new Duration(TimeSpan.FromSeconds(0.3));
                 doubleAnimationHeight.From = App.Current.MainWindow.Height - 80;
-                doubleAnimationHeight.To = 350;
+                doubleAnimationHeight.To = NewHeight;
 
                 grid.BeginAnimation(Grid.WidthProperty, doubleAnimationWidth);
                 grid.BeginAnimation(Grid.HeightProperty, doubleAnimationHeight);

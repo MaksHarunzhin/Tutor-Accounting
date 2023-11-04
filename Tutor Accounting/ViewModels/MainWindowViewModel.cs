@@ -34,6 +34,11 @@ namespace Tutor_Accounting.ViewModels
             set => Set(ref Fields._sizeMode, value);
         }
 
+        public ObservableCollection<bool> PanelsList
+        {
+            get => Fields._panelsList;
+            set => Set(ref Fields._panelsList, value);
+        }
         #endregion
 
         #region Commands

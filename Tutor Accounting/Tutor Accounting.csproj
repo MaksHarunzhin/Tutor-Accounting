@@ -72,6 +72,10 @@
     <Compile Include="Infrastructure\Helper.cs" />
     <Compile Include="Infrastructure\Service.cs" />
     <Compile Include="ViewModels\Base\ViewModel.cs" />
+    <Page Include="Views\MyUserControls\WorkZone.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Windows\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -83,6 +87,9 @@
     <Compile Include="Infrastructure\Commands\ActionCommand.cs" />
     <Compile Include="Infrastructure\Commands\Base\Command.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
+    <Compile Include="Views\MyUserControls\WorkZone.xaml.cs">
+      <DependentUpon>WorkZone.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Windows\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
