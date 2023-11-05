@@ -18,6 +18,7 @@ namespace Tutor_Accounting.Infrastructure
         public static bool CanShowSidePanelCommandExecute(object p) => true;
         public static void OnShowSidePanelCommandExecuted(object p)
         {
+            Helper.CloseOtherPanels(p);
             Grid grid = (Grid)p;
             if (grid.Width == 30)
             {

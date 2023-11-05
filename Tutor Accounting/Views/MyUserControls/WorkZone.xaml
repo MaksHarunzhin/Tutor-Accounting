@@ -9,6 +9,9 @@
     <Border CornerRadius="15"
             BorderThickness="2"
             BorderBrush="#00dfc4">
-        
+        <Border Background="Black"
+                Opacity="0.4"
+                CornerRadius="15"/>
+
     </Border>
 </UserControl>

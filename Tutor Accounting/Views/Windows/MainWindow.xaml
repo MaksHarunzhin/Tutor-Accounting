@@ -149,34 +149,93 @@
             Background="#00606d"
             VerticalAlignment="Top"
             CornerRadius="0,0,20,20">
-                    <fa:FontAwesome Icon="Solid_ChalkboardTeacher"
+                    <Grid>
+                        <fa:FontAwesome Icon="Solid_ChalkboardTeacher"
                                     HorizontalAlignment="Left"
                                     Margin="30,0,0,0"
                                     VerticalAlignment="Center"
                                     ToolTip="Мои ученики"
                                     x:Name="Mustudents">
-                        <behaviors:Interaction.Triggers>
-                            <behaviors:EventTrigger EventName="MouseLeftButtonDown" SourceObject="{Binding ElementName=Mustudents}">
-                                <behaviors:InvokeCommandAction Command="{Binding ShowSidePanelCommand}" CommandParameter="{Binding ElementName=SidePanelMyStudents}"/>
-                            </behaviors:EventTrigger>
-                        </behaviors:Interaction.Triggers>
-                        <fa:FontAwesome.Style>
-                            <Style TargetType="fa:FontAwesome">
-                                <Setter Property="Foreground" Value="Black"/>
-                                <Setter Property="FontSize" Value="20"/>
-                                <Style.Triggers>
-                                    <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter Property="Foreground" Value="White"/>
-                                        <Setter Property="FontSize" Value="25"/>
-                                    </Trigger>
-                                    <DataTrigger Binding="{Binding PanelsList[0]}" Value="True">
-                                        <Setter Property="Foreground" Value="White"/>
-                                        <Setter Property="FontSize" Value="25"/>
-                                    </DataTrigger>
-                                </Style.Triggers>
-                            </Style>
-                        </fa:FontAwesome.Style>
-                    </fa:FontAwesome>
+                            <behaviors:Interaction.Triggers>
+                                <behaviors:EventTrigger EventName="MouseLeftButtonDown" SourceObject="{Binding ElementName=Mustudents}">
+                                    <behaviors:InvokeCommandAction Command="{Binding ShowSidePanelCommand}" CommandParameter="{Binding ElementName=SidePanelMyStudents}"/>
+                                </behaviors:EventTrigger>
+                            </behaviors:Interaction.Triggers>
+                            <fa:FontAwesome.Style>
+                                <Style TargetType="fa:FontAwesome">
+                                    <Setter Property="Foreground" Value="Black"/>
+                                    <Setter Property="FontSize" Value="20"/>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Foreground" Value="White"/>
+                                            <Setter Property="FontSize" Value="25"/>
+                                        </Trigger>
+                                        <DataTrigger Binding="{Binding PanelsList[0]}" Value="True">
+                                            <Setter Property="Foreground" Value="White"/>
+                                            <Setter Property="FontSize" Value="25"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </fa:FontAwesome.Style>
+                        </fa:FontAwesome>
+                        <fa:FontAwesome Icon="Solid_Wrench"
+            HorizontalAlignment="Left"
+            Margin="130,0,0,0"
+            VerticalAlignment="Center"
+            ToolTip="Мои доходы"
+            x:Name="MyOptions">
+                            <behaviors:Interaction.Triggers>
+                                <behaviors:EventTrigger EventName="MouseLeftButtonDown" SourceObject="{Binding ElementName=MyOptions}">
+                                    <behaviors:InvokeCommandAction Command="{Binding ShowSidePanelCommand}" CommandParameter="{Binding ElementName=MyOptionsSidePanel}"/>
+                                </behaviors:EventTrigger>
+                            </behaviors:Interaction.Triggers>
+                            <fa:FontAwesome.Style>
+                                <Style TargetType="fa:FontAwesome">
+                                    <Setter Property="Foreground" Value="Black"/>
+                                    <Setter Property="FontSize" Value="20"/>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Foreground" Value="White"/>
+                                            <Setter Property="FontSize" Value="25"/>
+                                        </Trigger>
+                                        <DataTrigger Binding="{Binding PanelsList[2]}" Value="True">
+                                            <Setter Property="Foreground" Value="White"/>
+                                            <Setter Property="FontSize" Value="25"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </fa:FontAwesome.Style>
+                        </fa:FontAwesome>
+                        <fa:FontAwesome Icon="Solid_MoneyBillWave"
+HorizontalAlignment="Left"
+Margin="80,0,0,0"
+VerticalAlignment="Center"
+ToolTip="Мои доходы"
+x:Name="MuOptionsSidePanel">
+                            <behaviors:Interaction.Triggers>
+                                <behaviors:EventTrigger EventName="MouseLeftButtonDown" SourceObject="{Binding ElementName=MuOptionsSidePanel}">
+                                    <behaviors:InvokeCommandAction Command="{Binding ShowSidePanelCommand}" CommandParameter="{Binding ElementName=MyMoneySidePanel}"/>
+                                </behaviors:EventTrigger>
+                            </behaviors:Interaction.Triggers>
+                            <fa:FontAwesome.Style>
+                                <Style TargetType="fa:FontAwesome">
+                                    <Setter Property="Foreground" Value="Black"/>
+                                    <Setter Property="FontSize" Value="20"/>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Foreground" Value="White"/>
+                                            <Setter Property="FontSize" Value="25"/>
+                                        </Trigger>
+                                        <DataTrigger Binding="{Binding PanelsList[1]}" Value="True">
+                                            <Setter Property="Foreground" Value="White"/>
+                                            <Setter Property="FontSize" Value="25"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </fa:FontAwesome.Style>
+                        </fa:FontAwesome>
+
+                    </Grid>
                 </Border>
                 <Border Height="55" Width="140"
                         VerticalAlignment="Top"
@@ -296,7 +355,7 @@
                 BorderBrush="#00dfc4"
                 Background="#00606d"
                 BorderThickness="0,2,2,2">
-                        <Label Content="Мои ученики"
+                        <Label Content="МОИ УЧЕНИКИ"
                            HorizontalContentAlignment="Right"
                            VerticalContentAlignment="Top"
                            Padding="0,0,40,0"
@@ -333,7 +392,7 @@
 
                 <Grid HorizontalAlignment="Left"
                 VerticalAlignment="Top"
-                      x:Name="OtherGrid"
+                      x:Name="MyMoneySidePanel"
                 Width="{Binding SidePanelWidth[1]}">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
@@ -349,7 +408,20 @@
                         BorderBrush="#00dfc4"
                         Background="#00606d"
                         BorderThickness="0,2,2,2">
-
+                        <Label Content="МОИ ДОХОДЫ"
+    HorizontalContentAlignment="Right"
+    VerticalContentAlignment="Top"
+    Padding="0,0,40,0"
+    Height="30"
+    Width="350"
+    Margin="-351,0,29,316"
+    FontSize="20"
+    Foreground="White"
+    RenderTransformOrigin="1,0">
+                            <Label.RenderTransform>
+                                <RotateTransform Angle="-90"/>
+                            </Label.RenderTransform>
+                        </Label>
                     </Border>
                     <Border Margin="0,0,30,0"
         Grid.Column="0"
@@ -361,7 +433,7 @@
                     </Border>
                     <behaviors:Interaction.Triggers>
                         <behaviors:EventTrigger EventName="MouseLeftButtonDown" SourceObject="{Binding ElementName=SecondBorder}">
-                            <behaviors:InvokeCommandAction Command="{Binding ShowSidePanelCommand}" CommandParameter="{Binding ElementName=OtherGrid}"/>
+                            <behaviors:InvokeCommandAction Command="{Binding ShowSidePanelCommand}" CommandParameter="{Binding ElementName=MyMoneySidePanel}"/>
                         </behaviors:EventTrigger>
                     </behaviors:Interaction.Triggers>
                     <Grid.Style>
@@ -373,7 +445,7 @@
 
                 <Grid HorizontalAlignment="Left"
         VerticalAlignment="Top"
-                      x:Name="OtherGrid1"
+                      x:Name="MyOptionsSidePanel"
         Width="{Binding SidePanelWidth[2]}">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
@@ -389,10 +461,10 @@
                 BorderBrush="#00dfc4"
                 Background="#00606d"
                 BorderThickness="0,2,2,2">
-                        <!--<Label Content="Мои ученики"
-   HorizontalContentAlignment="Center"
+                        <Label Content="ПРОФИЛЬ"
+   HorizontalContentAlignment="Right"
    VerticalContentAlignment="Top"
-   Padding="0,0,0,0"
+   Padding="0,0,40,0"
    Height="30"
    Width="350"
    Margin="-351,0,29,316"
@@ -402,7 +474,7 @@
                     <Label.RenderTransform>
                         <RotateTransform Angle="-90"/>
                     </Label.RenderTransform>
-                </Label>-->
+                </Label>
                     </Border>
                     <Border Margin="0,0,30,0"
 Grid.Column="0"
@@ -414,7 +486,7 @@ Background="#00606d">
                     </Border>
                     <behaviors:Interaction.Triggers>
                         <behaviors:EventTrigger EventName="MouseLeftButtonDown" SourceObject="{Binding ElementName=ThirdBorder}">
-                            <behaviors:InvokeCommandAction Command="{Binding ShowSidePanelCommand}" CommandParameter="{Binding ElementName=OtherGrid1}"/>
+                            <behaviors:InvokeCommandAction Command="{Binding ShowSidePanelCommand}" CommandParameter="{Binding ElementName=MyOptionsSidePanel}"/>
                         </behaviors:EventTrigger>
                     </behaviors:Interaction.Triggers>
                     <Grid.Style>
