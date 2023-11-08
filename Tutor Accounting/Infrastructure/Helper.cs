@@ -45,6 +45,7 @@ namespace Tutor_Accounting.Infrastructure
 
                     Fields._panelsList[i] = false; 
                     Fields._sidePanelWidth[i] = 30;
+                    break;
                 }
             }
         }

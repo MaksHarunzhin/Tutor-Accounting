@@ -71,8 +71,26 @@
     <Compile Include="Infrastructure\Fields.cs" />
     <Compile Include="Infrastructure\Helper.cs" />
     <Compile Include="Infrastructure\Service.cs" />
+    <Compile Include="Models\TimeLine.cs" />
+    <Compile Include="Models\ZoomBorder.cs" />
     <Compile Include="ViewModels\Base\ViewModel.cs" />
     <Page Include="Views\MyUserControls\WorkZone.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\TimeLines\OneDay.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\TimeLines\OneMonth.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\TimeLines\OneWeek.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\TimeLines\OneYear.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -89,6 +107,18 @@
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="Views\MyUserControls\WorkZone.xaml.cs">
       <DependentUpon>WorkZone.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\TimeLines\OneDay.xaml.cs">
+      <DependentUpon>OneDay.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\TimeLines\OneMonth.xaml.cs">
+      <DependentUpon>OneMonth.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\TimeLines\OneWeek.xaml.cs">
+      <DependentUpon>OneWeek.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\TimeLines\OneYear.xaml.cs">
+      <DependentUpon>OneYear.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Windows\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -122,8 +152,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Models\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
